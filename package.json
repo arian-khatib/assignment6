@@ -5,11 +5,17 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "tw:build": "tailwindcss -i ./public/css/tailwind.css -o ./public/css/main.css"
   },
   "author": "Arian Khatib",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
+    "daisyui": "^4.7.2",
+    "tailwindcss": "^3.4.1"
   }
 }
