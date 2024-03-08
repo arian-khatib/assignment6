@@ -1,11 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./views/**/*.html", // This will include all HTML files in the views directory and subdirectories
-  ],
+  content: [`./views/**/*.ejs`], // all .ejs files
   theme: {
     extend: {},
-    // Optionally, define a custom theme here if needed
+  
   },
   plugins: [
     require('daisyui'), // Adds DaisyUI components

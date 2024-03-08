@@ -1,5 +1,5 @@
 /********************************************************************************
-*  WEB322 – Assignment 03
+*  WEB322 – Assignment 04
 * 
 *  I declare that this assignment is my own work in accordance with Seneca's
 *  Academic Integrity Policy:
@@ -8,7 +8,7 @@
 * 
 *  Name: Arian Khatib Student ID: 119670222 Date:2/16/2024
 *
-*  Published URL: 
+*  Published URL: https://funny-fawn-waders.cyclic.app
 *
 ********************************************************************************/
 
@@ -18,10 +18,8 @@ const path = require('path');
 const unCountryData = require("./modules/unCountries");
 
 const HTTP_PORT = process.env.PORT || 8080;
-
-
+app.set('view engine', 'ejs');
 app.use(express.static('public'));
-
 
 function onHttpStart() {
     console.log("Express http server listening on: " + HTTP_PORT);
@@ -29,49 +27,54 @@ function onHttpStart() {
 
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "/views/home.html"));
+    res.render("home", { page: '/' });
 });
 
 
 app.get("/about", (req, res) => {
-    res.sendFile(path.join(__dirname, "/views/about.html"));
+    res.render("about", { page: '/about' });
 });
-
 
 app.get("/un/countries", async (req, res) => {
     try {
-        const { region } = req.query;
-        if (region) {
-            const countriesByRegion = await unCountryData.getCountriesByRegion(region);
-            res.json(countriesByRegion);
-        } else {
-            const allCountries = await unCountryData.getAllCountries();
-            res.json(allCountries);
-        }
-    } catch (err) {
-        res.status(404).send("Error retrieving countries: " + err.message);
+        const countries = await unCountryData.getAllCountries(); // Fetch the countries data
+        res.render("countries", {
+            countries: countries,
+            page: '/un/countries' // Ensure this to highlight the navbar link
+        });
+    } catch (error) {
+        console.error("Failed to fetch countries:", error);
+        res.status(500).send("Error loading country data.");
     }
 });
 
 
-app.get("/un/countries/:a2code", async (req, res) => {
+app.get('/un/countries/:a2code', async (req, res) => {
     try {
         const country = await unCountryData.getCountryByCode(req.params.a2code);
-        if (country) {
-            res.json(country);
-        } else {
+        if (!country) {
             throw new Error("Country not found");
         }
-    } catch (err) {
-        res.status(404).send("Country not found: " + err.message);
+        res.render("country", {
+            country: country,
+            page: '' 
+        });
+    } catch (error) {
+        res.status(404).render("404", { 
+            message: "I'm sorry, we're unable to find the country you're looking for.",
+            page: '' 
+        });
     }
 });
+
 
 
 app.use((req, res) => {
-    res.status(404).sendFile(path.join(__dirname, "/views/404.html"));
+    res.status(404).render("404", {
+        message: "The page you are looking for cannot be found.",
+        page: '' 
+    });
 });
-
 
 unCountryData.initialize().then(() => {
     app.listen(HTTP_PORT, onHttpStart);

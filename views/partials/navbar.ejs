@@ -1,0 +1,7 @@
+<nav class="flex justify-between items-center p-4 bg-blue-500 text-white">
+    <a href="/" class="text-xl <%= (page == '/') ? 'active' : '' %>">UN Member States</a>
+    <div>
+        <a href="/un/countries" class="mr-4 <%= (page == '/un/countries') ? 'active' : '' %>">All Countries</a>
+        <a href="/about" class="mr-4 <%= (page == '/about') ? 'active' : '' %>">About</a>
+    </div>
+</nav>
