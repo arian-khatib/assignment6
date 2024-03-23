@@ -1,15 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [`./views/**/*.ejs`], // all .ejs files
+  content: [`./views/*.ejs`],
   theme: {
     extend: {},
-  
   },
-  plugins: [
-    require('daisyui'), // Adds DaisyUI components
-    require('@tailwindcss/typography'), // Adds typography enhancements
-  ],
+  plugins: [require('@tailwindcss/typography'), require('daisyui')],
+
   daisyui: {
-    themes: ["fantasy"], // This is an example; adjust the theme as needed
+    themes: ['cupcake'],
   },
 }
+

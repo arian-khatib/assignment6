@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UN Countries</title>
+  <link rel="stylesheet" href="/css/main.css" />
+
+</head>
+
+<body tabindex="-1">
+  <%- include('partials/navbar', {page: ''}) %>
+
+  <div class="container mx-auto">
+
+    <div class="hero bg-base-200 rounded-lg p-6">
+      <div class="hero-content text-center ">
+        <div class="max-w-md">
+          <h1 class="text-5xl font-bold">Edit Country</h1>
+          <h1 class="text-5xl font-bold"> <%= country.name %></h1>
+
+          <p class="py-6">Use the below form to update the Country "<%= country.name %>" </p>
+
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <br />
+<div class="container mx-auto p-4">
+    <form action="/un/editCountry/<%= country.a2code %>" method="post">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 gap-y-0">
+     
+        <div>
+          <div class="mb-6">
+              <label class="block text-gray-700 font-medium" for="name">Name</label>
+              <input type="text" name="name" id="name" value="<%= country.name %>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" required />             
+          </div>
+          <div class="mb-6">
+              <label class="block text-gray-700 font-medium" for="official">Official Name</label>
+              <input type="text" name="official" id="official" value="<%= country.official %>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" required />
+              
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 font-medium" for="wikipediaURL">Wikipedia URL</label>
+            <input type="url" name="wikipediaURL" id="wikipediaURL" value="<%= country.wikipediaURL %>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" required />       
+          </div>
+         
+          <div class="mb-6">
+            <label class="block text-gray-700 font-medium" for="flag">Flag Image URL</label>
+            <input type="url" name="flag" id="flag" value="<%= country.flag %>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" required />
+            
+          </div>
+          
+      </div>
+
+      <div>
+        <div class="mb-6">
+          <label class="block text-gray-700 font-medium" for="regionId">Region</label>
+              <select name="regionId" id="regionId" value="<%= country.regionId %>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" required >
+                <option <% if (country.regionId === 1) { %>selected<% } %> value="1">Africa</option>
+                <option <% if (country.regionId === 2) { %>selected<% } %> value="2">Americas</option>
+                <option <% if (country.regionId === 3) { %>selected<% } %> value="3">Asia</option>
+                <option <% if (country.regionId === 4) { %>selected<% } %> value="4">Europe</option>
+                <option <% if (country.regionId === 5) { %>selected<% } %> value="5">Oceania</option>
+              </select>         
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 font-medium" for="a2code">Alpha 2 Code</label>
+          <input type="text" name="a2code" id="a2code" value="<%= country.a2code %>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300 opacity-50 cursor-not-allowed" readonly required />
+          
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 font-medium" for="capital">Capital</label>
+            <input type="text" name="capital" id="capital" value="<%= country.capital %>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" required />  
+        </div>
+      </div>
+
+      <div>
+        <div class="mb-6">
+            <label class="block text-gray-700 font-medium" for="population">Population</label>
+            <input type="number" name="population" id="population" value="<%= country.population %>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" required />
+            
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-gray-700 font-medium" for="languages">Languages</label>
+            <input type="text" name="languages" id="languages" value="<%= country.languages %>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" required />
+            
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 font-medium" for="nativeName">Native Name</label>
+          <input type="text" name="nativeName" id="nativeName" value="<%= country.nativeName %>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" required />             
+        </div>
+
+        <div class="mb-6">
+          <label for="permanentUNSC" class="block text-gray-700 font-medium">In Permanent UNSC Member?</label>
+              <input type="checkbox" name="permanentUNSC" class="checkbox" <% if (country.permanentUNSC) { %>checked<% } %>>
+             
+        
+      </div> 
+      </div>
+        
+       
+    
+      <p></p>
+       
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 gap-y-0">
+      <div class="mt-6">
+        
+          <a href="/un/deleteCountry/<%= country.a2code %>" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">Delete</a>
+        
+      </div> 
+
+      <div class="mt-6">
+        <button class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg" type="submit">Update</button>
+      </div>
+    </div>
+
+
+    </div>
+
+    </form>
+
+  </div>
+</body>
+
+</html>
