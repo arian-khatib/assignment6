@@ -24,6 +24,9 @@
         <a href="<%= country.wikipediaURL %>" class="btn">Wikipedia</a>
         <div id="quote"></div>
         <a href="#" onclick="history.back(); return false;" class="btn">Go Back</a>
+        <% if (session.user) { %>
+        <button>Edit</button>
+        <% } %>
     </div>
 
     <script>

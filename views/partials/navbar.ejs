@@ -1,18 +1,27 @@
 <div class="navbar bg-base-100">
-    <div class="flex-1">
-      <a class="btn btn-ghost normal-case text-xl" href="/">UN Member States</a>
-    </div>
-  
-    <div class="dropdown">
-      
-      </label>
-      <ul tabindex="0" class="menu menu-sm dropdown-content right-0 mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a href="/about" class=<%-  (currentRoute == '/about') ? "active" : '' %> >About</a></li>
-        <li><a href="/un/addCountry" class=<%-  (currentRoute == '/un/addCountry') ? "active" : '' %> >Add Country</a></li>
-        <li><a class="<%= (currentRoute == "/un/countries") ? 'active' : '' %>" href="/un/countries"> All Countries </a></li>
-      </ul>
-    </div>
-  
-   
-  <br />
-  
+  <div class="flex-1">
+    <a class="btn btn-ghost normal-case text-xl" href="/">UN Member States</a>
+  </div>
+
+  <% if (session && session.user) { %>
+  <div class="dropdown">
+    <label>
+      <button class="btn">Account: <%= session.user.userName %></button>
+    </label>
+    <ul tabindex="0" class="menu menu-sm dropdown-content right-0 mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+      <li><a href="/userHistory" class=<%-  (currentRoute == '/userHistory') ? "active" : '' %>>User History</a></li>
+      <li><a href="/logout">Log Out</a></li>
+    </ul>
+  </div>
+  <% } else { %>
+  <div class="dropdown">
+    <label>
+      <button class="btn">Account</button>
+    </label>
+    <ul tabindex="0" class="menu menu-sm dropdown-content right-0 mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+      <li><a href="/login" class=<%-  (currentRoute == '/login') ? "active" : '' %>>Login</a></li>
+      <li><a href="/register" class=<%-  (currentRoute == '/register') ? "active" : '' %>>Register</a></li>
+    </ul>
+  </div>
+  <% } %>
+</div>

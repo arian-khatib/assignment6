@@ -11,8 +11,15 @@
   "author": "Arian Khatib",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "client-sessions": "^0.8.0",
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.9",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^8.3.1",
+    "mysql2": "^3.9.2",
+    "pg": "^8.11.3",
+    "sequelize": "^6.37.1"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
